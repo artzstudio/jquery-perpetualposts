@@ -2,20 +2,16 @@
 /* global console: true, jQuery: true */
 (function ($) {
 	'use strict';
-	var counter = 0;
 	$.fn.perpetualPosts = function (options) {
 
 		if (!options) {
 			options = {};
 		}
-		options.selector = options.selector || this.selector;
+		var selector = options.selector || this.selector;
+		var callback = options.callback;
 
 		return this.each(function (index, anchor) {
-
 			var $anchor = $(anchor);
-			var callback = options.callback;
-			var selector = options.selector;
-
 			$anchor.click(function (event) {
 				$.get($anchor[0].href, function (data) {
 
@@ -54,7 +50,7 @@
 						$anchor.perpetualPosts(options);
 						$anchor.insertAfter($content);
 					} else {
-						throw 'jQuery.perpetualPosts anchor (' + selector + ') not found in data.';
+						throw 'Next jQuery.perpetualPosts anchor (' + selector + ') not found in data.';
 					}
 				});
 				event.preventDefault();
